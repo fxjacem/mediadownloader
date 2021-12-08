@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}
+    mediaDownloader - Result Page
+{% endblock %}
+
+{% block content%}
+    <h2>RESPONSE</h2>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+
+    {% if data  == "NO" %}
+        <p>I'm sorry, there are no results to display!</p>
+    {% else %}
+        {{ data['extractor'] }} - {{ data['title'] }}
+        <br><br>
+        {% for element in data['datas'] %}
+            <div class="element">
+                {{ element['resolution'] }}
+                <button onclick="window.open('{{ element['url'] }}', '_blank')">Open in new tab</button>
+                <button onclick="downloadVideo('{{ element['url'] }}')">Download video</button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form action="/result" method="POST">
+        <button type="submit"> Back </button>
+    </form>
+
+    <script>
+        function downloadVideo(in_url){
+            console.log('Hi! Click...');
+            console.log(in_url);
+
+            axios({
+                url: in_url,
+                method: 'GET',
+                responseType: 'blob'
+            }).then((response) => {
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'video.mp4');
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            })
+        };
+    </script>
+
+{% endblock%}

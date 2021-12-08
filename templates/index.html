@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}
+    mediaDownloader - Home Page
+{% endblock %}
+
+{% block content%}
+    <h1>Home Page</h1>
+
+    <form action="/" method="POST">
+        <button type="submit" name="button" value="first">First App</button><br>
+        <button type="submit" name="button" value="second">Second App</button><br>
+    </form>
+{% endblock%}

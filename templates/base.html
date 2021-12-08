@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>{% block title %} {% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="shotcut icon" type="image/x-ico" href="{{ url_for('static', filename='images/favicon.ico') }}">
+        <!--
+            <script src="{{ url_for('static', filename='js/download.js') }}"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        -->
+    </head>
+
+    <body>
+        {% block content %}
+        {% endblock %}
+    </body>
+
+
+
+</html>
